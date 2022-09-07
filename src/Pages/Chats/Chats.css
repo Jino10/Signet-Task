@@ -1,0 +1,62 @@
+.videoWrapper {
+  width: 60%;
+  position: relative;
+  border-radius: 10px;
+}
+.videoHeader {
+  background-color: var(--black);
+}
+.wrapperCard .titleHeader {
+  padding-left: 0;
+}
+.videoHeader {
+  background-color: var(--black);
+  position: absolute;
+  padding: 20px;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: var(--white);
+}
+.videoWrapper video {
+  border-radius: 10px;
+}
+.videoInfo {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 30px 0;
+}
+.contactSalesText {
+  padding-top: 20px;
+}
+
+#fc_frame.fc-widget-fullscreen.fc-widget-normal,
+#fc_frame.fc-widget-fullscreen.fc-widget-small,
+#fc_frame.fc-mobile-view.h-open-container {
+  margin-left: 16% !important;
+  width: 83% !important;
+  height: 88% !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .videoWrapper {
+    width: 100%;
+  }
+  #fc_frame.fc-widget-fullscreen.fc-widget-normal,
+  #fc_frame.fc-widget-fullscreen.fc-widget-small,
+  #fc_frame.fc-mobile-view.h-open-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+    height: 88% !important;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .wrapperCard .titleHeader h6,
+  .videoHeader h5 {
+    font-size: 16px;
+  }
+}

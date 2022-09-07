@@ -1,0 +1,64 @@
+{
+  "root": true,
+  "settings": {},
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true,
+    "jest/globals": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "prettier",
+    "plugin:testing-library/react",
+    "plugin:jest/all"
+  ],
+  "plugins": ["prettier", "react", "react-hooks", "testing-library", "jest"],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {},
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "no-console": 1,
+    "no-unused-vars": 1,
+    "import/no-unresolved": 2,
+    "no-undefined": 2,
+    "react/jsx-uses-vars": 2,
+    "import/no-named-as-default": 0,
+    "react/prop-types": [0],
+    "prefer-template": 0,
+    "import/prefer-default-export": 0,
+    "import/order": 0,
+    "no-unused-expressions": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jest/require-hook": 0,
+    "react/jsx-props-no-spreading": 0,
+    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "default-param-last": 0,
+    "react/no-unknown-property": [1, { "ignore": ["controls"] }]
+  }
+}

@@ -1,0 +1,165 @@
+.header {
+  position: sticky;
+  top: 0;
+}
+
+.view-heading {
+  font-weight: 600;
+}
+
+.actionBox {
+  gap: 10px;
+}
+.actionBox img {
+  cursor: pointer;
+}
+.titleHeader {
+  background-color: var(--white);
+  padding: 20px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.titleHeader .info h6 {
+  color: var(--secondary);
+  font-size: 28px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.info p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.headerAction {
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagingBox {
+  background-color: #fff;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+.disabledImg {
+  opacity: 0.3;
+}
+.pagingBox .current {
+  color: var(--primary);
+}
+.pagingBox .total {
+  color: #8c8c8c;
+}
+.userModal .modal-content {
+  border-radius: 20px !important;
+}
+.userModal .modal-header {
+  border-bottom: 0 !important;
+}
+.userModal .modal-title {
+  color: #16216c;
+  font-size: 18px;
+  font-weight: 600;
+}
+.userModal .btn-close {
+  font-size: 12px;
+  font-weight: 600;
+}
+.userModal .modal-body {
+  padding-top: 10px !important;
+  padding-bottom: 0 !important;
+}
+.userModal .form-control,
+.userModal .form-select {
+  min-height: 50px !important;
+  color: #6c757d !important;
+  width: 100%;
+}
+.userModal .form-control:focus,
+.userModal .form-select:focus {
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+.input-group,
+.org-group,
+.email-group,
+.role-group,
+.status-group {
+  position: relative;
+}
+.modal-body .input-group input,
+.modal-body .input-group select {
+  width: 100% !important;
+}
+.input-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 93px;
+  color: #f00;
+}
+.org-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 117px;
+  color: #f00;
+}
+.email-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 57px;
+  color: #f00;
+}
+.role-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 47px;
+  color: #f00;
+}
+.status-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 64px;
+  color: #f00;
+}
+.userModal .modal-footer {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 14px !important;
+}
+.userModal .saveBtn {
+  background-color: #16216c !important;
+  color: #fff !important;
+  min-height: 40px !important;
+  min-width: 115px !important;
+  border-radius: 10px !important;
+}
+.imgProfile {
+  width: 10%;
+}
+.ticketTable .btn-link {
+  padding-left: 0;
+}
+@media only screen and (max-width: 767px) {
+  .imgProfile {
+    width: 35%;
+  }
+}
+.truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-indent: 0;
+  text-align: justify;
+}

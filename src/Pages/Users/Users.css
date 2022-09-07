@@ -1,0 +1,261 @@
+.header {
+  position: sticky;
+  top: 0;
+}
+.actionBox {
+  gap: 10px;
+}
+.actionBox img {
+  cursor: pointer;
+}
+.titleHeader {
+  background-color: var(--white);
+  padding: 20px 0;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.titleHeader .info {
+  margin-left: 0;
+}
+.titleHeader .info h6 {
+  color: var(--secondary);
+  font-size: 28px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.info p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.headerAction {
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.search-input {
+  background: rgba(22, 33, 108, 0.1);
+  border-radius: 5px;
+  min-width: 299px;
+  min-height: 45px;
+  font-size: 12px;
+  border: none;
+  padding-right: 32px;
+}
+.searchInput {
+  position: relative;
+}
+.searchInput .inputIcon {
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  cursor: pointer;
+}
+.pagingBox {
+  background-color: #fff;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+.disabledImg {
+  opacity: 0.3;
+}
+.pagingBox .current {
+  color: var(--primary);
+}
+.pagingBox .total {
+  color: #8c8c8c;
+}
+.userModal .modal-content {
+  border-radius: 20px !important;
+}
+.userModal .modal-header {
+  border-bottom: 0 !important;
+}
+.userModal .modal-title {
+  color: #16216c;
+  font-size: 18px;
+  font-weight: 600;
+}
+.userModal .btn-close {
+  font-size: 12px;
+  font-weight: 600;
+}
+.userModal .modal-body {
+  padding-top: 10px !important;
+  padding-bottom: 0 !important;
+}
+.userModal .form-control,
+.userModal .form-select {
+  min-height: 50px !important;
+  color: #6c757d !important;
+}
+.userModal .form-control:focus,
+.userModal .form-select:focus {
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+.input-group,
+.org-group,
+.email-group,
+.role-group,
+.status-group {
+  position: relative;
+}
+
+.input-group::after {
+  content: none !important;
+  position: absolute;
+  top: 15px;
+  left: 93px;
+  color: #f00;
+}
+.org-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 117px;
+  color: #f00;
+}
+.email-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 57px;
+  color: #f00;
+}
+.role-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 47px;
+  color: #f00;
+}
+.status-group::after {
+  content: '*';
+  position: absolute;
+  top: 15px;
+  left: 64px;
+  color: #f00;
+}
+.userModal .modal-footer {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 14px !important;
+}
+.userModal .saveBtn {
+  background-color: #16216c !important;
+  color: #fff !important;
+  min-height: 40px !important;
+  min-width: 115px !important;
+  border-radius: 10px !important;
+  float: right !important;
+}
+.hidePlacholder::after {
+  display: none;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column !important;
+}
+
+.input-container p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tabelBase table thead {
+  background-color: rgb(142 144 143 / 9%);
+}
+.tabelBase table thead th {
+  font-size: 15px;
+  font-weight: 500;
+  color: #808080;
+  padding: 1.3rem 0.8rem;
+  border: 0;
+}
+.tabelBase table tbody {
+  border-top: none !important;
+  background-color: var(--white);
+  border: 0;
+}
+.tabelBase table tbody tr {
+  border: 1px solid rgba(146, 146, 146, 0.1);
+}
+.tabelBase table tbody td {
+  padding: 0.7rem 0.8rem;
+  font-size: 14px !important;
+  border: 0;
+  vertical-align: baseline;
+}
+.tableBaseBox {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  justify-content: flex-end;
+}
+.react-bs-table-sizePerPage-dropdown {
+  display: none;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #686868;
+  background-color: #85898f00;
+  border-color: #0d6efd00;
+  font-size: 1.2em;
+}
+.page-link {
+  position: relative;
+  display: block;
+  color: #9b9898;
+  text-decoration: none;
+  background-color: #fafafa;
+  border: 1px solid #fafafa;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  font-size: 1.2em;
+}
+#search-bar-0-label {
+  display: none;
+}
+.searchWIC {
+  display: flex;
+  position: relative;
+}
+.searchWIC img {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.searchWIC input {
+  padding-right: 2em;
+}
+.headerAction .wrapperBase {
+  padding: 0 !important;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .searchWIC {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .searchWIC .search-label {
+    width: 100%;
+  }
+  .headerAction {
+    margin-bottom: 10px;
+  }
+}

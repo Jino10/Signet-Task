@@ -1,0 +1,150 @@
+.announcemnetSelect {
+  width: 50%;
+}
+
+.announcemnetSelect select {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  color: darkblue;
+}
+
+.rdw-editor-wrapper {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  border-radius: 7px;
+}
+
+.announcemnetSelect select:focus {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+}
+
+.formWrap {
+  width: 60%;
+  padding-left: 20px;
+}
+
+.input_group {
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #acafb5;
+}
+
+.dataResult {
+  margin-top: 2px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: 10;
+}
+
+.dataItem {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+}
+
+.dataItem p {
+  margin-left: 10px;
+}
+
+.dataItem:hover {
+  background-color: rgb(242, 241, 244);
+}
+
+.wrapperCard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(181, 177, 177, 0.35) 0px 5px 10px;
+  border: 1px white solid;
+}
+
+.baseBg {
+  background-color: rgb(238, 239, 240);
+  height: 100%;
+}
+
+.info {
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .formWrap {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .formWrap {
+    padding-left: 0;
+  }
+
+  .announcemnetSelect {
+    width: 100%;
+  }
+
+  .serachBox {
+    min-height: 50px;
+  }
+
+  .serachBox input {
+    padding-left: 0px;
+  }
+
+  .serachBox img {
+    right: 5px;
+    top: 13px;
+  }
+
+  .announcemnetSelect select {
+    padding: 5px 5px 5px 8px;
+    min-height: 50px;
+    font-size: 14px;
+  }
+
+  .formWrap form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formWrap .buttonPrimary {
+    margin: 0 auto;
+  }
+  .announcentBox .rdw-link-modal {
+    left: -97px;
+  }
+}
+.error {
+  border: 2px solid red;
+}
+
+.announcentBox .rdw-link-modal {
+  height: auto;
+}
+.announcentBox .public-DraftStyleDefault-ltr {
+  padding-left: 10px;
+}
+.relative {
+  position: relative !important;
+}
+.searchOrg {
+  height: 65px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 30px;
+}
+.msgError {
+  font-size: 15px;
+  color: red;
+}

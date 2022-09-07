@@ -1,0 +1,254 @@
+/* --------Font ---- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/lemonade/2.5/lemonade.min.css');
+
+:root {
+  --ff: 'Poppins', san-serif !important;
+
+  --primary: #2a6ebb;
+  --secondary: #16216c;
+  --white: #fff;
+  --black: #000;
+  --gray: #8e908f;
+  --gray1: #ccc;
+  --gray2: #f0f0f0;
+  --gray3: #3c4858;
+  --blueShade1: #f7f8fd;
+  --red: #f02b34;
+  --danger: #ee7071;
+  --success: #3dd598;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--ff);
+  width: 100%;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+}
+.main {
+  overflow-x: hidden;
+}
+/* --common css ---- */
+.wrapperBase {
+  padding: 25px;
+}
+.buttonPrimary {
+  background-color: #16216c !important;
+  color: #fff !important;
+  min-height: 45px !important;
+  min-width: 150px !important;
+  border-radius: 10px !important;
+  border: 0;
+}
+.buttonDanger {
+  background-color: #f02b34 !important;
+  color: #fff !important;
+  min-height: 45px !important;
+  min-width: 150px !important;
+  border-radius: 10px !important;
+  border-color: var(--red);
+}
+.buttonPrimary:focus,
+.buttonDanger:focus {
+  box-shadow: none;
+  border-color: var(--primary);
+}
+.tabelBase thead {
+  background-color: rgb(142 144 143 / 9%);
+}
+.tabelBase thead th {
+  font-size: 15px;
+  font-weight: 500;
+  color: #808080;
+  padding: 1.3rem 0.8rem;
+}
+.tabelBase tbody {
+  border-top: none !important;
+  background-color: var(--white);
+}
+.tabelBase tbody td {
+  padding: 0.8rem 0.5rem;
+  font-size: 14px !important;
+}
+.wrapperCard {
+  background: var(--white);
+  border: 1px solid rgba(142, 144, 143, 0.28);
+  box-shadow: 0px 34px 34px rgba(13, 46, 97, 0.05);
+  border-radius: 25px;
+  padding: 15px 20px 20px 20px;
+}
+
+.customInputBox {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 5px 10px 10px 30px;
+  position: relative;
+}
+.customInputBox input,
+.customInputBox textarea {
+  border: none;
+}
+.customInputBox .form-control:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+.customInputBox label {
+  font-size: 12px;
+  color: var(--gray);
+}
+.info h6 {
+  color: var(--secondary);
+  font-size: 28px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.info p {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.alertWrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 300px;
+  z-index: 10050;
+}
+.alertWrapper .btn-close {
+  font-size: 10px;
+}
+.alertWrapper .alert-heading {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.alertWrapper p {
+  margin-bottom: 0;
+}
+.btnDisable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.offcanvas-backdrop {
+  z-index: 2147483601;
+}
+.customCanvasBox {
+  z-index: 2147483602;
+}
+
+@media only screen and (max-width: 767px) {
+  .modal-backdrop {
+    width: 100%;
+    height: 100%;
+  }
+  .menuIcn {
+    display: block !important;
+    cursor: pointer;
+  }
+  .sidebarBox {
+    display: none;
+  }
+  .mainWrapBox {
+    flex-basis: 100%;
+  }
+  .showSidebar {
+    display: block;
+    position: absolute;
+    background: var(--white);
+    z-index: 9999999999;
+    height: 100%;
+    min-width: 60%;
+    box-shadow: 1px 2px 3px var(--gray1);
+    border-top: 1px solid var(--gray2);
+  }
+  .wrapperBase {
+    padding: 15px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .wrapperBase {
+    padding: 10px;
+  }
+  .titleHeader {
+    padding: 10px 0 !important;
+  }
+  .headerAction .buttonPrimary {
+    margin: 0 auto;
+  }
+  .wrapperCard {
+    padding: 15px;
+  }
+  .customInputBox {
+    padding: 5px 5px 5px 8px !important;
+  }
+  .customInputBox input,
+  .customInputBox textarea {
+    font-size: 14px;
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+.blueBtn {
+  background-color: #16216c !important;
+  color: #fff !important;
+  border: 1px solid #16216c !important;
+  box-shadow: none !important;
+}
+.layoutHeaderArea {
+  height: calc(100vh - 80px) !important;
+  overflow: auto !important;
+  background-color: #fafafa !important;
+}
+.widthFull {
+  width: 100% !important;
+}
+.-mTop20 {
+  margin-top: -20px !important;
+}
+.width-95 {
+  width: 95% !important;
+}
+.width-90 {
+  width: 90% !important;
+}
+.minHeight45 {
+  min-height: 45px !important;
+}
+.errorColor {
+  color: #dc3545 !important;
+}
+.pRight6 {
+  padding-right: 6px !important;
+}
+.text-align-justify {
+  text-align: justify !important;
+}
+.zIndex-99 {
+  z-index: 99 !important;
+}
+.dangerAlert {
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  padding: 0px;
+  background: white;
+  border: none;
+}

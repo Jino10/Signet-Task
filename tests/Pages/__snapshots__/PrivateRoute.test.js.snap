@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard should render Dashboard 1`] = `
+Array [
+  <Users
+    userId="11111"
+  />,
+]
+`;

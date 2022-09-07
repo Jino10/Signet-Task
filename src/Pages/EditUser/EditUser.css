@@ -1,0 +1,61 @@
+.userSelect select {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding: 10px;
+}
+.editWrap {
+  width: 60%;
+}
+
+.profileCircle {
+  background-color: var(--primary);
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+}
+.requiredTxt {
+  color: red;
+  font-size: 14px;
+}
+.editAction {
+  gap: 15px;
+  margin: 30px 0;
+}
+.buttonDefault {
+  min-width: 150px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 1px 1px 3px #777575;
+}
+#editUserForm .form-control.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: none !important;
+  background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc3545%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e') !important;
+}
+#editUserForm .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%) !important;
+}
+@media only screen and (max-width: 1024px) {
+  .editWrap {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .userSelect select {
+    padding: 5px 5px 5px 8px;
+    min-height: 50px;
+    font-size: 14px;
+  }
+  .editWrap form {
+    display: flex;
+    flex-direction: column;
+  }
+  .editAction input {
+    width: auto;
+    min-width: auto !important;
+    padding: 10px 15px;
+  }
+}

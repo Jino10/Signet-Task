@@ -1,0 +1,128 @@
+{
+  "name": "signet-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@okta/okta-auth-js": "6.0",
+    "@okta/okta-react": "6.4",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.1",
+    "bootstrap": "^5.1.3",
+    "chart.js": "^3.8.0",
+    "chartjs-plugin-datalabels": "^2.1.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "env-cmd": "^10.1.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "firebase": "^9.8.3",
+    "freshchat-widget": "^1.0.6",
+    "jest-environment-jsdom": "^28.1.0",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "net": "^1.0.2",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-alert": "^7.0.3",
+    "react-bootstrap": "^2.2.0",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-bootstrap-table2-paginator": "^2.1.2",
+    "react-bootstrap-table2-toolkit": "^2.1.3",
+    "react-chartjs-2": "^4.2.0",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
+    "react-ga4": "^1.4.1",
+    "react-hook-form": "^7.12.2",
+    "react-linkify": "^1.0.0-alpha",
+    "react-moment": "^1.1.2",
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.0",
+    "react-select": "^5.4.0",
+    "react-test-renderer": "^18.1.0",
+    "react-toastify": "7.0.3",
+    "redux": "^4.2.0",
+    "regenerator-runtime": "^0.13.9",
+    "rxjs": "^7.5.5",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
+    "web-vitals": "^2.1.4",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:uat": "env-cmd -f .env.uat react-scripts start",
+    "build": "react-scripts build",
+    "build:uat": "env-cmd -f .env.uat react-scripts build",
+    "build:prod": "env-cmd -f .env.prod react-scripts build",
+    "test": "jest --coverage --config=jest.config.js",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
+    "format": "prettier -w .",
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^28.1.0",
+    "cheerio": "=1.0.0-rc.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-flowtype": "4.7.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.1.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest-enzyme": "^7.1.2",
+    "jest-extended": "^2.0.0",
+    "jest-junit": "^13.2.0",
+    "jest-nyancat-reporter": "^2.0.0",
+    "jest-react-hooks-shallow": "^1.5.1",
+    "jest-skipped-reporter": "0.0.5",
+    "jest-slow-test-reporter": "^1.0.0",
+    "prettier": "^2.7.1"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
+    ]
+  },
+  "resolutions": {
+    "jest-environment-jsdom": "27.4.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write && limt-fix"
+    ]
+  }
+}

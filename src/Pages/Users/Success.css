@@ -1,0 +1,22 @@
+.succesWrap {
+  height: 100vh;
+}
+.succesWrap .blastImg {
+  width: 50%;
+  top: unset;
+  margin-bottom: 35px;
+}
+.succesWrap .infoTxt {
+  font-size: 34px;
+}
+.succesWrap .subTxt {
+  font-size: 18px;
+}
+.successBox {
+  padding: 30px 10px;
+  box-shadow: 0px 0px 3px #ccc;
+  border-radius: 6px;
+}
+.successBox .successLogo {
+  width: 200px;
+}

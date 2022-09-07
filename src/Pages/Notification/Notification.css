@@ -1,0 +1,56 @@
+.notifyBodyWrap {
+  background-color: #fff;
+  padding: 15px;
+}
+.notifyBodyBox {
+  border: 1px solid #f1eaea;
+  border-radius: 5px;
+  margin: 8px 0;
+  padding: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.notifyBodyInfo {
+  color: #7a7676;
+  font-size: 14px;
+}
+.notifyBodyBox:hover {
+  background-color: #f9f9f9;
+}
+.notifyBodyBox span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #dddddd;
+}
+.notifyBodyWrap .active {
+  border-color: #15216c69;
+  background: #15216cbd;
+}
+.notifyBodyWrap .active span {
+  background-color: #fff;
+}
+.notifyBodyWrap .active:hover {
+  border-color: #15216c69;
+  background: #15216cbd;
+}
+.notifyBodyWrap .active .notifyBodyInfo {
+  color: #fff;
+}
+.pagination {
+  justify-content: center;
+}
+.paginationButton,
+.paginationButton:active,
+.paginationButton:hover {
+  margin: 2px;
+  color: black;
+  background: #15216cbd;
+  border-color: #15216cbd;
+}
+.paginationButton:disabled {
+  color: black;
+  background: #dddddd;
+  border-color: #dddddd;
+}
