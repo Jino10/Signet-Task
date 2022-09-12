@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useEffect, useState } from 'react';
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -14,6 +14,9 @@ import './Tickets.css';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
+// Add ticket-pop up window
+import AddTicket from './AddTicket';
+
 function Tickets() {
   const navigate = useNavigate();
   const [users, setUser] = useState([]);
@@ -23,6 +26,7 @@ function Tickets() {
   const [alertMessage, setAlertMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { buttonTracker, linkTracker } = useAnalyticsEventTracker();
+  const [show, setShow] = useState(false);
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -120,6 +124,10 @@ function Tickets() {
       <h6 className="text-center text-bold m-0 p-0">Loading ...</h6>
     );
 
+  // modal for add ticket
+  const newTicket = () => setShow(true);
+  const handleClose = () => setShow(false);
+
   return (
     <div className="wrapperBase">
       <div className="tabelBase" data-test-id="usertable">
@@ -134,10 +142,11 @@ function Tickets() {
                 <div className="headerAction d-flex align-items-center">
                   <Button
                     className="buttonPrimary"
-                    onClick={() => {
-                      buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
-                      navigate(`/ticket/add`);
-                    }}
+                    onClick={
+                      // buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
+                      // navigate(`/ticket/add`);
+                      newTicket
+                    }
                   >
                     <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
                   </Button>
@@ -159,6 +168,16 @@ function Tickets() {
             <Alert.Heading>{alertMessage}</Alert.Heading>
           </Alert>
         )}
+
+        <Modal show={show} onHide={handleClose} size="xl"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered>
+          <Modal.Header closeButton/>
+          <Modal.Body >
+            <AddTicket openModal={handleClose} />
+          </Modal.Body>
+        </Modal>
+
       </div>
     </div>
   );

@@ -229,9 +229,7 @@ function SignUp() {
   };
 
   // Showing pop-up window
-  const handleShow = () => {
-      setShow(true);
-    }
+  const handleShow = () => setShow(true);
 
   return (
     <Container fluid className="signUpWrapper">
