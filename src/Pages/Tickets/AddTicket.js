@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { fetchCall, makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
-import Loading from '../Widgets/Loading';
+// import Loading from '../Widgets/Loading';
 import Alerts from '../Widgets/Alerts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
 import Select from 'react-select';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
-export default function AddTicket() {
+export default function AddTicket({openModal}) {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
   const [saveLoading, setSaveLoading] = useState(false);
@@ -199,42 +199,14 @@ export default function AddTicket() {
           alertshow={alertMessage}
         />
       )}
-      {saveLoading && <Loading />}
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
           <div className="titleHeader d-flex align-items-center justify-content-between">
             <div className="info">
-              <h6>{id ? `Edit Ticket # : ${PostObject.ticketNo}` : 'Add Ticket'}</h6>
+              <h6>{id ? `Edit Ticket # : ${PostObject.ticketNo}` : 'Create Ticket'}</h6>
             </div>
           </div>
 
           <div className="wrapperBase">
             <Form noValidate validated={validated}>
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col">
-                  <Form.Label>
-                    Description <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    className="width-95"
-                    placeholder="Enter description"
-                    required
-                    name="description"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.description = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={PostObject.description}
-                  />
-                  <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
-                </div>
-              </Form.Group>
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col-6">
                   <Form.Label>
@@ -277,8 +249,8 @@ export default function AddTicket() {
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col-6">
                   <Form.Label>Problem Code {!id && <span className="requiredTxt">*</span>}</Form.Label>
+                  <div className='width-90'>
                   <Form.Select
-                    className="width-90"
                     data-testid="problemCode"
                     onChange={(e) => {
                       setPostObject((prev) => {
@@ -296,6 +268,7 @@ export default function AddTicket() {
                       </option>
                     ))}
                   </Form.Select>
+                </div>
                 </div>
                 {id && (
                   <div className="input-container col-6">
@@ -372,17 +345,39 @@ export default function AddTicket() {
                   </div>
                 </Form.Group>
               )}
+              <Form.Group className="mb-3 input-group">
+                <div className="input-container col">
+                  <Form.Label>
+                    Description <span className="requiredTxt">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    className="width-100"
+                    placeholder="Enter description"
+                    required
+                    name="description"
+                    onChange={(e) => {
+                      setPostObject((prev) => {
+                        const Current = { ...prev };
+                        Current.description = e.target.value;
+                        return Current;
+                      });
+                    }}
+                    value={PostObject.description}
+                    style={{height:"130px"}}
+                  />
+                  <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
+                </div>
+              </Form.Group>
             </Form>
-            <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
-              <input
-                className="buttonDefault text-center minHeight45"
-                type="submit"
-                onClick={() => {
-                  buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
-                  navigate('/tickets');
-                }}
-                value="Cancel"
-              />
+            <div className="d-flex justify-content-md-end justify-content-sm-center justify-content-center editAction">
+              <Button
+                className="buttonPrimary text-center minHeight45"
+                type="button"
+                onClick={openModal}
+              >
+                Cancel
+              </Button>
               <Button
                 className="buttonPrimary text-center"
                 onClick={() => {
@@ -402,8 +397,6 @@ export default function AddTicket() {
               </Button>
             </div>
           </div>
-        </>
-      )}
     </div>
   );
 }
