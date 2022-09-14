@@ -241,7 +241,7 @@ export default function AddTicket({ openModal }) {
 
             <div className="input-container col-6" >
               <div style={{ position: 'absolute', left: '510px', top: '40px' }}>
-                <i className={`fa-solid ${arrow ? "fa-arrow-up text-success" : "fa-arrow-down text-danger"}`} />
+                <i className={`fa-solid ${arrow ? "fa-arrow-up text-danger" : "fa-arrow-down text-success"}`} />
               </div>
               <Form.Label style={{ position: 'relative' }}>Priority {!id && <span className="requiredTxt">*</span>}</Form.Label>
               <Form.Select

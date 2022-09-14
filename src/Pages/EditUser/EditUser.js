@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import APIUrlConstants from '../../Config/APIUrlConstants';
@@ -14,7 +14,11 @@ import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
 export default function EditUser() {
   const { id } = useParams();
+  // console.log(id);
+  const [show, setShow] = useState(false);
+  const [editable, setEditable] = useState(false);
   const [roles, setRoles] = useState();
+  const [error, setError] = useState(false);
   const [alertVarient, setAlertVarient] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -46,6 +50,7 @@ export default function EditUser() {
 
   const fetchRoles = async () => {
     const { 0: status, 1: result } = await makeRequest(APIUrlConstants.GET_USER_ROLES);
+    // console.log(result);
 
     if (status === httpStatusCode.SUCCESS) {
       setRoles(result.data);
@@ -86,6 +91,7 @@ export default function EditUser() {
     } = await makeRequest(`${APIUrlConstants.GET_USER_DETAILS}/${id}`);
     if (statusCode === httpStatusCode.SUCCESS) {
       const res = data;
+      // console.log(res);
       const userValues = {
         firstName: res?.firstName ?? '',
         lastName: res?.lastName ?? '',
@@ -110,12 +116,14 @@ export default function EditUser() {
     fetchRoles();
   }, [fetchUserDetails]);
 
+  // To update user data
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_USER_DETAILS);
     setIsLoading(true);
     const { 0: status, 1: data } = await fetchCall(APIUrlConstants.UPDATE_USER_DETAILS, apiMethods.PUT, user);
     const statusCode = status;
     const responseData = data;
+    console.log(responseData);
 
     if (statusCode === httpStatusCode.SUCCESS) {
       setAlertMessage('User updated successfully');
@@ -138,6 +146,48 @@ export default function EditUser() {
   };
 
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  const handleClose = () => setShow(false);
+
+  // To delete user data
+  const deleteUser = async () => {
+    buttonTracker(gaEvents.DELETE_USER);
+    setIsLoading(true);
+    const deleteUserStatus = sessionStorage.getItem('deleteUserActive');
+
+    const dUser = {
+      status: deleteUserStatus,
+    };
+
+    const { 0: statusCode, 1: responseData } = await fetchCall(`${APIUrlConstants.DELETE_USER}/${id}`, apiMethods.DELETE, dUser);
+    if (statusCode === httpStatusCode.SUCCESS) {
+      setShowAlert(true);
+      setAlertMessage('Deleted successfully');
+      setError(false);
+      handleClose();
+      sessionStorage.removeItem('deleteUserActive');
+      sessionStorage.removeItem('deleteUserId');
+      setTimeout(() => {
+        // fetchAllUserDetails();
+        setTimeout(() => {
+          closeAlert();
+        }, 3000);
+      }, 2000);
+    } else {
+      setShowAlert(true);
+      setError(true);
+      setAlertMessage(responseData.message);
+      handleClose();
+      setIsLoading(false);
+      sessionStorage.removeItem('deleteUserActive');
+      sessionStorage.removeItem('deleteUserId');
+      setTimeout(() => {
+        closeAlert();
+      }, 5000);
+    }
+    handleClose();
+  };
+
 
   return (
     <div className="wrapperBase">
@@ -170,173 +220,213 @@ export default function EditUser() {
             <Form onSubmit={handleSubmit(updateUser)} id="editUserForm">
               <div className="mb-3">
                 <Form.Label>
-                  First Name <span className="requiredTxt">*</span>
+                  <b> First Name</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group>
-                  <Form.Control
-                    type="text"
-                    id="fullname"
-                    data-testid="FName"
-                    name="fullname"
-                    value={user.firstName ?? ''}
-                    isValid={touchedFields.firstName && !errors.firstName}
-                    isInvalid={errors.firstName}
-                    {...register('firstName', {
-                      required: 'First Name is Required',
-                      minLength: {
-                        value: 3,
-                        message: 'Minimum 3 Characters Required for  first name',
-                      },
-                      maxLength: {
-                        value: 30,
-                        message: 'Name was Too High',
-                      },
-                      pattern: {
-                        message: 'Enter a valid First Name',
-                      },
-                    })}
-                    onChange={(e) => {
-                      setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
-                    }}
-                  />
+                  {!editable ? <p>{user.firstName}</p> :
+                    <Form.Control
+                      type="text"
+                      id="fullname"
+                      data-testid="FName"
+                      name="fullname"
+                      value={user.firstName ?? ''}
+                      isValid={touchedFields.firstName && !errors.firstName}
+                      isInvalid={errors.firstName}
+                      {...register('firstName', {
+                        required: 'First Name is Required',
+                        minLength: {
+                          value: 3,
+                          message: 'Minimum 3 Characters Required for  first name',
+                        },
+                        maxLength: {
+                          value: 30,
+                          message: 'Name was Too High',
+                        },
+                        pattern: {
+                          message: 'Enter a valid First Name',
+                        },
+                      })}
+                      onChange={(e) => {
+                        setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
+                      }}
+                    />}
                   {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
                 </Form.Group>
               </div>
               <div className="mb-3">
                 <Form.Label>
-                  Last Name <span className="requiredTxt">*</span>
+                  <b>Last Name</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group>
-                  <Form.Control
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    data-testid="LName"
-                    value={user.lastName}
-                    isValid={touchedFields.lastName && !errors.lastName}
-                    isInvalid={errors.lastName}
-                    {...register('lastName', {
-                      required: 'Last Name is Required',
-                      maxLength: {
-                        value: 30,
-                        message: 'Last name was Too High',
-                      },
-                      pattern: {
-                        message: 'Enter a valid last Name',
-                      },
-                    })}
-                    onChange={(e) => {
-                      setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
-                    }}
-                  />
+                  {!editable ? <p>{user.lastName}</p> :
+                    <Form.Control
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      data-testid="LName"
+                      value={user.lastName}
+                      isValid={touchedFields.lastName && !errors.lastName}
+                      isInvalid={errors.lastName}
+                      {...register('lastName', {
+                        required: 'Last Name is Required',
+                        maxLength: {
+                          value: 30,
+                          message: 'Last name was Too High',
+                        },
+                        pattern: {
+                          message: 'Enter a valid last Name',
+                        },
+                      })}
+                      onChange={(e) => {
+                        setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
+                      }}
+                    />
+                  }
                   {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
                 </Form.Group>
               </div>
               <div className="mb-3">
                 <Form.Label>
-                  Organization <span className="requiredTxt">*</span>
+                  <b> Organization</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group>
-                  <AsyncSelect
-                    value={selectedValue}
-                    getOptionLabel={(e) => e.companyName}
-                    getOptionValue={(e) => e.companyName}
-                    loadOptions={loadOptions}
-                    onChange={handleChange}
-                    placeholder="Search for Organization Name"
-                    styles={customStyles}
-                    components={{
-                      IndicatorSeparator: () => null,
-                    }}
-                  />
+                  {!editable ? <p>{user.orgName}</p> :
+                    <AsyncSelect
+                      value={selectedValue}
+                      getOptionLabel={(e) => e.companyName}
+                      getOptionValue={(e) => e.companyName}
+                      loadOptions={loadOptions}
+                      onChange={handleChange}
+                      placeholder="Search for Organization Name"
+                      styles={customStyles}
+                      components={{
+                        IndicatorSeparator: () => null,
+                      }}
+                    />
+                  }
                   {errors.Organization && <p className="text-danger">{errors.Organization.message}</p>}
                 </Form.Group>
               </div>
               <div className="mb-3">
                 <Form.Label>
-                  Organization Email <span className="requiredTxt">*</span>
+                  <b> Organization Email</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group>
-                  <Form.Control
-                    type="email"
-                    name="orgEmail"
-                    data-testid="orgEmail"
-                    id="orgEmail"
-                    required
-                    disabled
-                    value={user?.orgEmail}
-                    {...register('orgEmail', {
-                      pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-                    })}
-                  />
+                  {!editable ? <p>{user?.orgEmail}</p> :
+                    <Form.Control
+                      type="email"
+                      name="orgEmail"
+                      data-testid="orgEmail"
+                      id="orgEmail"
+                      required
+                      disabled
+                      value={user?.orgEmail}
+                      {...register('orgEmail', {
+                        pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
+                      })}
+                    />
+                  }
                   {errors.orgEmail && <p className="text-danger">{errors.orgEmail.message}</p>}
                 </Form.Group>
               </div>
-
               <div className="mb-3">
                 <Form.Label>
-                  Role <span className="requiredTxt">*</span>
+                  <b> Role</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group className="mb-3 userSelect">
-                  <Form.Select
-                    value={user.roleId}
-                    onChange={(e) => {
-                      setUser((prevState) => ({
-                        ...prevState,
-                        roleId: e.target.value === '' ? setRoleValidated(true) : (setRoleValidated(false), e.target.value),
-                      }));
-                    }}
-                    isInvalid={roleValidated}
-                  >
-                    <option value="">Select Role</option>
-                    {roles?.length > 0 &&
-                      roles?.map((roleData) => (
-                        <option value={roleData.roleId} key={roleData.roleId}>
-                          {roleData?.name}
-                        </option>
-                      ))}
-                  </Form.Select>
+                  {!editable ? <p>{user.roleId}</p> :
+                    <Form.Select
+                      value={user.roleId}
+                      onChange={(e) => {
+                        setUser((prevState) => ({
+                          ...prevState,
+                          roleId: e.target.value === '' ? setRoleValidated(true) : (setRoleValidated(false), e.target.value),
+                        }));
+                      }}
+                      isInvalid={roleValidated}
+                    >
+                      <option value="">Select Role</option>
+                      {roles?.length > 0 &&
+                        roles?.map((roleData) => (
+                          <option value={roleData.roleId} key={roleData.roleId}>
+                            {roleData?.name}
+                          </option>
+                        ))}
+                    </Form.Select>
+                  }
                   {roleValidated ? <Form.Control.Feedback type="invalid">Role is required </Form.Control.Feedback> : null}
                 </Form.Group>
               </div>
               <div className="mb-3">
                 <Form.Label>
-                  Status <span className="requiredTxt">*</span>
+                  <b>Status</b> <span className="requiredTxt">*</span>
                 </Form.Label>
                 <Form.Group className="userSelect mb-2">
-                  <Form.Select
-                    value={user.status}
-                    onChange={(e) => {
-                      setUser((prevState) => ({ ...prevState, status: e.target.value }));
-                    }}
-                  >
-                    {user.status === 'Pending' ? <option value="Pending">pending</option> : null}
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </Form.Select>
+                  {!editable ? <p>{user.status}</p> :
+                    <Form.Select
+                      value={user.status}
+                      onChange={(e) => {
+                        setUser((prevState) => ({ ...prevState, status: e.target.value }));
+                      }}
+                    >
+                      {user.status === 'Pending' ? <option value="Pending">pending</option> : null}
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </Form.Select>
+                  }
                 </Form.Group>
               </div>
-              <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
-                <input
-                  className="buttonDefault text-center"
-                  type="submit"
-                  onClick={() => {
-                    buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
-                    navigate('/users');
-                  }}
-                  value="Cancel"
-                />
-                <input
-                  className="buttonPrimary text-center"
-                  type="submit"
-                  value="Update"
-                  disabled={roleValidated ? 'disabled' : ''}
-                />
-              </div>
+              {!editable ?
+                <div>
+                  <Button
+                    className="buttonPrimary text-center"
+                    type="button"
+                    onClick={() => setEditable(true)} >
+                    Edit
+                  </Button>
+                </div>
+                :
+                <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
+                  <input
+                    className="buttonPrimary text-center"
+                    type="submit"
+                    value="Update"
+                    disabled={roleValidated ? 'disabled' : ''}
+                  />
+                  {/* <input
+                    className="buttonDefault text-center"
+                    type="submit"
+                    onClick={() => {
+                      buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
+                      navigate('/users');
+                    }}
+                    value="Cancel"
+                  /> */}
+                  <Button
+                    className="buttonDanger text-center"
+                    type="button"
+                    onClick={() => setShow(true)} >
+                    Delete Account
+                  </Button>
+                </div>
+              }
             </Form>
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body className="p-5">Are you sure you want to delete this user ?</Modal.Body>
+        <Modal.Footer className="p-3">
+          <Button
+            variant="secondary"
+            onClick={handleClose} >
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteUser}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
