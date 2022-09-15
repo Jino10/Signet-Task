@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { fetchCall, makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
-// import Loading from '../Widgets/Loading';
 import Alerts from '../Widgets/Alerts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
@@ -58,7 +57,6 @@ export default function AddTicket({ openModal }) {
     const optionArray = [];
     const fetchSitelist = await makeRequest(`${APIUrlConstants.LIST_SITES}?customerNo=${localStorage.getItem('orgNo')}`);
     const fetchPriority = await makeRequest(APIUrlConstants.LIST_PRIORITY);
-    // console.log(fetchPriority);
     const fetchProblemcode = await makeRequest(APIUrlConstants.LIST_PROBLEM_CODE);
     let resolvedArr;
     if (id) {
@@ -193,9 +191,7 @@ export default function AddTicket({ openModal }) {
     });
   };
 
-  // Arrow showing
   const setPriorityArrow = (val) => {
-    // console.log(1,arrow,val)
     if (val === 'Low' || val === 'Very Low') {
       setArrow(false);
     } else if (val === 'Medium' || val === 'High' || val === 'Very High') {
@@ -249,7 +245,6 @@ export default function AddTicket({ openModal }) {
                 className="width-90"
                 data-testid="priorityValue"
                 onChange={(e) => {
-                  // console.log(e.target.value)
                   setPostObject((prev) => {
                     const Current = { ...prev };
                     setPriorityArrow(e.target.value);

@@ -38,8 +38,6 @@ function UsersList({ userId }) {
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
     const { 0: statusCode, 1: data } = await makeRequest(APIUrlConstants.FETCH_USER_DETAILS);
-    // console.log(statusCode);
-    // console.log(data);
     if (statusCode === httpStatusCode.SUCCESS) {
       setIsLoading(false);
     }

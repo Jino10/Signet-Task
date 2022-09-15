@@ -14,7 +14,6 @@ import './Tickets.css';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
-// Add ticket-pop up window
 import AddTicket from './AddTicket';
 
 function Tickets() {
@@ -124,7 +123,6 @@ function Tickets() {
       <h6 className="text-center text-bold m-0 p-0">Loading ...</h6>
     );
 
-  // modal for add ticket
   const newTicket = () => setShow(true);
   const handleClose = () => setShow(false);
 
@@ -143,8 +141,6 @@ function Tickets() {
                   <Button
                     className="buttonPrimary"
                     onClick={
-                      // buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
-                      // navigate(`/ticket/add`);
                       newTicket
                     }
                   >
@@ -172,7 +168,7 @@ function Tickets() {
         <Modal show={show} onHide={handleClose} size="xl"
           aria-labelledby="contained-modal-title-vcenter"
           centered>
-          <Modal.Header closeButton/>
+          <Modal.Header closeButton />
           <Modal.Body >
             <AddTicket openModal={handleClose} />
           </Modal.Body>

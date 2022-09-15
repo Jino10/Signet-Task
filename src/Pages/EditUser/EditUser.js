@@ -14,7 +14,6 @@ import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
 export default function EditUser() {
   const { id } = useParams();
-  // console.log(id);
   const [show, setShow] = useState(false);
   const [editable, setEditable] = useState(false);
   const [roles, setRoles] = useState();
@@ -50,7 +49,6 @@ export default function EditUser() {
 
   const fetchRoles = async () => {
     const { 0: status, 1: result } = await makeRequest(APIUrlConstants.GET_USER_ROLES);
-    // console.log(result);
 
     if (status === httpStatusCode.SUCCESS) {
       setRoles(result.data);
@@ -91,7 +89,6 @@ export default function EditUser() {
     } = await makeRequest(`${APIUrlConstants.GET_USER_DETAILS}/${id}`);
     if (statusCode === httpStatusCode.SUCCESS) {
       const res = data;
-      // console.log(res);
       const userValues = {
         firstName: res?.firstName ?? '',
         lastName: res?.lastName ?? '',
@@ -116,7 +113,6 @@ export default function EditUser() {
     fetchRoles();
   }, [fetchUserDetails]);
 
-  // To update user data
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_USER_DETAILS);
     setIsLoading(true);
@@ -149,16 +145,13 @@ export default function EditUser() {
 
   const handleClose = () => setShow(false);
 
-  // To delete user data
   const deleteUser = async () => {
     buttonTracker(gaEvents.DELETE_USER);
     setIsLoading(true);
     const deleteUserStatus = sessionStorage.getItem('deleteUserActive');
-
     const dUser = {
       status: deleteUserStatus,
     };
-
     const { 0: statusCode, 1: responseData } = await fetchCall(`${APIUrlConstants.DELETE_USER}/${id}`, apiMethods.DELETE, dUser);
     if (statusCode === httpStatusCode.SUCCESS) {
       setShowAlert(true);
@@ -168,11 +161,8 @@ export default function EditUser() {
       sessionStorage.removeItem('deleteUserActive');
       sessionStorage.removeItem('deleteUserId');
       setTimeout(() => {
-        // fetchAllUserDetails();
-        setTimeout(() => {
-          closeAlert();
-        }, 3000);
-      }, 2000);
+        closeAlert();
+      }, 5000);
     } else {
       setShowAlert(true);
       setError(true);
@@ -187,7 +177,6 @@ export default function EditUser() {
     }
     handleClose();
   };
-
 
   return (
     <div className="wrapperBase">
@@ -348,7 +337,7 @@ export default function EditUser() {
                       <option value="">Select Role</option>
                       {roles?.length > 0 &&
                         roles?.map((roleData) => (
-                          <option value={roleData.roleId} key={roleData.roleId}>
+                          <option value={roleData.name} key={roleData.roleId}>
                             {roleData?.name}
                           </option>
                         ))}
@@ -393,15 +382,6 @@ export default function EditUser() {
                     value="Update"
                     disabled={roleValidated ? 'disabled' : ''}
                   />
-                  {/* <input
-                    className="buttonDefault text-center"
-                    type="submit"
-                    onClick={() => {
-                      buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
-                      navigate('/users');
-                    }}
-                    value="Cancel"
-                  /> */}
                   <Button
                     className="buttonDanger text-center"
                     type="button"
